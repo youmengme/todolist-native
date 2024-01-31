@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "miniprogram-ci": "^1.9.10",
     "weui-miniprogram": "^1.0.8"
   }
 }

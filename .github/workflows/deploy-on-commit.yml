@@ -1,0 +1,45 @@
+name: Deploy on Tag Creation
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+$' # 此正则表达式匹配 v 开头，后面跟数字，点，数字，点，数字的标签，可能跟随着其他字符
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Extract version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+
+      - name: Get tag description
+        id: get_tag_description
+        run: |
+          TAG_DESCRIPTION=$(git tag -l --format='%(contents)' ${{ env.VERSION }})
+          echo "message=$TAG_DESCRIPTION" >> $GITHUB_ENV
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Create private key file
+        run: |
+          echo "$PRIVATE_KEY" > private.key
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+        shell: bash
+
+      - name: Run deploy script with version
+        run: |
+          node ./deploy/index.js
+        env:
+          version: ${{ env.VERSION }}
+          appid: ${{secret.APPID}}
+          message: ${{ env.message }}
