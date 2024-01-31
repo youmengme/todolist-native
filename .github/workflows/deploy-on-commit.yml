@@ -40,5 +40,5 @@ jobs:
           node ./deploy/index.js
         env:
           version: ${{ env.VERSION }}
-          appid: ${{secret.APPID}}
+          appid: ${{secrets.APPID}}
           message: ${{ env.message }}
