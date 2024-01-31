@@ -124,13 +124,13 @@ Page({
     const todoIndex = e.currentTarget.dataset.index
     const todo = this.data.pending[todoIndex]
     wx.navigateTo({
-      url: '../detail/index?id=' + todo._id,
+      url: '/pages/detail/index?id=' + todo._id,
     })
   },
 
   toAddPage() {
     wx.navigateTo({
-      url: '../../pages/add/index',
+      url: '/pages/add/index',
     })
   }
 })
