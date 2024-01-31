@@ -1,11 +1,11 @@
 const ci = require('miniprogram-ci')
 ;(async () => {
-  console.log('__dirname', __dirname)
+  console.log('process.cwd()', process.cwd())
   const project = new ci.Project({
     appid: process.env.appid,
     type: 'miniProgram',
-    projectPath: `${__dirname}`,
-    privateKeyPath: `${__dirname}/private.key`,
+    projectPath: `${process.cwd()}`,
+    privateKeyPath: `${process.cwd()}/private.key`,
     ignores: ['node_modules/**/*'],
   })
   const uploadResult = await ci.upload({
