@@ -1,10 +1,9 @@
 name: Deploy on Tag Creation
-
 on:
+  workflow_dispatch:
   push:
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+' # 此正则表达式匹配 v 开头，后面跟数字，点，数字，点，数字的标签，可能跟随着其他字符
-
+      - 'v*.*.*'
 jobs:
   deploy:
     runs-on: ubuntu-latest
