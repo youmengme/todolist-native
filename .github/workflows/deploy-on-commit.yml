@@ -23,7 +23,7 @@ jobs:
         id: get_tag_description
         run: |
           TAG_DESCRIPTION=$(git tag -l --format='%(contents)' ${{ env.VERSION }})
-          echo "message=$TAG_DESCRIPTION" >> $GITHUB_ENV
+          echo "message=${{ github.event.release.body }}" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: npm install
