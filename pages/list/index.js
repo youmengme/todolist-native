@@ -11,8 +11,7 @@ Page({
 
   onShow() {
     // 通过云函数调用获取用户 _openId
-    db.list().then(res => {
-      const { data } = res
+    db.list().then(data => {
       // 存储查询到的数据
       this.setData({
         // data 为查询到的所有待办事项列表

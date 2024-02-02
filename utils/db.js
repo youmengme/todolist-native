@@ -47,9 +47,7 @@ class DB {
 
   async list() {
     const todos = wx.getStorageSync(dbName) || []
-    return {
-      data: todos
-    }
+    return todos
   }
 }
 
