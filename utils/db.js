@@ -17,7 +17,6 @@ class DB {
       _id: uuid()
     }])
   }
-
   async update(id, data) {
     const list = wx.getStorageSync(dbName) || []
     const index = list.findIndex(item => item._id === id)
